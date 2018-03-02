@@ -7,15 +7,15 @@
     <script>
     //WOW!
     //Rawr xD
-    //LUL
+    //LUL I was here. ME
       var config = {
         type: Phaser.AUTO,
-        width: 1024,
-        height: 768,
+        width: 800,
+        height: 600,
         physics: {
           default: 'arcade',
           arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 400 },
             debug: false
           }
         },
@@ -47,12 +47,41 @@
         platforms.create(600, 400, 'platform-1');
         platforms.create(50, 250, 'platform-1');
         platforms.create(750, 220, 'platform-1');
+
+        player = this.physics.add.sprite(100, 450, 'snowman');
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+
+        this.physics.add.collider(player, platforms);
+
+        cursors = this.input.keyboard.createCursorKeys();
+
       }
 
       function update()
       {
+        if (cursors.left.isDown) {
+            player.setVelocityX(-400);
+        } else if (cursors.right.isDown) {
+            player.setVelocityX(400);
+        } else {
+            player.setVelocityX(0);
+        }
 
+        if (cursors.up.isDown && player.body.touching.down) {
+            player.setVelocityY(-400);
+        }
+
+        // If the player is out of bounds, respawn the player.
+        // this.sprite.body.checkWorldBounds
+        if () {
+
+        }
       }
+
+      // window.onload = function () {
+      //   document.getElementsByTagName("canvas")[0].focus();
+      // }
     </script>
   </body>
 </html>
